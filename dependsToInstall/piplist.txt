@@ -1,0 +1,6 @@
+pywin32
+python-docx
+pyqt5
+PyQt5-tools
+docxcompose
+pyinstaller
