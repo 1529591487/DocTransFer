@@ -135,14 +135,14 @@ class TransThread(QThread):
             return
         for filePath in self.filePathList:
             newType = self.newType
-            self.processOneFile(newType, filePath)
+            self.processOneFile(dealer,newType, filePath)
 
         self.infoSignal.emit("All done！")
         dealer.Quit()
 
-    def processOneFile(self, newType, filePath):
+    def processOneFile(self, dealer, newType, filePath):
         self.infoSignal.emit(filePath)
-        newFileName = self.getNewFileName(filePath)
+        newFileName = self.getNewFileName(newType, filePath)
         if '' == newFileName:
             return
         try:
@@ -164,7 +164,7 @@ class TransThread(QThread):
         except Exception as e:
             self.errorSignal.emit(str(e))
 
-    def getNewFileName(self, filePath):
+    def getNewFileName(self, newType, filePath):
         try:
             dirPath = os.path.dirname(filePath)
             baseName = os.path.basename(filePath)
